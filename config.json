@@ -1,0 +1,23 @@
+{
+  "default_env": "stage",
+  "default_browser": "chrome",
+  "output_logs": "output/logs",
+  "output_screenshots": "output/screenshots",
+  "output_reports": "output/reports",
+  "environments": {
+    "stage": {
+      "base_url": "https://www.saucedemo.com/",
+      "element_time_out": 3,
+      "page_load_time_out": 5,
+      "retry_count": 1,
+      "retry_delay": 1
+    },
+    "product": {
+      "base_url": "https://www.pro.saucedemo.com/",
+      "element_time_out": 5,
+      "page_load_time_out": 10,
+      "retry_count": 2,
+      "retry_delay": 2
+    }
+  }
+}

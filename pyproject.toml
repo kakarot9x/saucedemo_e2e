@@ -1,0 +1,21 @@
+# pyproject.toml
+[project]
+name = "saucedemo_e2e"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "pytest>=8.4.1",
+    "selenium>=4.35.0",
+    "allure-pytest>=2.15.0",
+    "webdriver-manager>=4.0.2",
+    "pytest-selenium>=4.1.0",
+    "pytest-html>=4.1.1",
+    "wheel",
+
+]
+
+# Optional: Pytest configuration within pyproject.toml
+[tool.pytest.ini_options]
+addopts = "--alluredir=output/allure-results"
+testpaths = ["tests"]
+python_files = "*.py"
