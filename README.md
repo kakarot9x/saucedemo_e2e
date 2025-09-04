@@ -3,8 +3,9 @@
 - It's built on Python apply the POM design pattern to ensure our tests are readable, robust & easy to maintain.
 - Key features: 
 logging, reporting, support flexible configuration for env, browser, headless mode; 
-parallel test run, auto capture screenshot on failure or on demand, allure report for detail, Using UV for env management,
-auto setup and run test in one script, easy to integrate with CI/CD like Jenkins, gitHub actions, ...
+auto capture screenshot on failure or on demand, allure report for detail, Using UV for env management,
+auto setup and run test in one script, easy to integrate with CI/CD like Jenkins, gitHub actions,...
+- TODO: parallel test run(pytest-xdist), Apply testrail id to push to TestRail automatically(trcli),...
 
 - Including test:
 
