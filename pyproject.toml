@@ -11,7 +11,7 @@ dependencies = [
     "pytest-selenium>=4.1.0",
     "pytest-html>=4.1.1",
     "wheel",
-
+    "by>=0.0.7",
 ]
 
 # Optional: Pytest configuration within pyproject.toml

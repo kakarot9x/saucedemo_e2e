@@ -5,7 +5,6 @@ from selenium.webdriver.common.by import By
 
 from constants import Urls
 from pages.base_page import BasePage
-import pytest
 
 log = logging.getLogger(__name__)
 
@@ -39,7 +38,7 @@ class LoginPage(BasePage):
         self.click_login_button()
         if self.get_current_url() == Urls.INVENTORY_URL:
             return InventoryPage(self.driver)
-        return None  # Indicate login failed or redirected elsewhere
+        return None  # login failed
 
     def get_error_message(self):
         return self.get_element_text(self.ERROR_MESSAGE_LOCATOR)

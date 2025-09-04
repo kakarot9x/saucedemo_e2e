@@ -30,5 +30,5 @@ class ExpectedMessages:
 
 
 class CheckoutInfo:
- STANDARD_USER_INFO = {"first_name": "John", "last_name": "Doe", "zip_code": "12345"}
- ANOTHER_USER_INFO = {"first_name": "Jane", "last_name": "Smith", "zip_code": "98765"}
+ STANDARD_USER_INFO = {"first_name": "Viet", "last_name": "Le", "zip_code": "12345"}
+ ANOTHER_USER_INFO = {"first_name": "Hoang", "last_name": "Nguyen", "zip_code": "98765"}

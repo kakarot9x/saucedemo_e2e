@@ -3,9 +3,6 @@ from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
 
-
-# from pages.inventory_page import InventoryPage # <--- REMOVE THIS LINE
-
 class ProductDetailPage(BasePage):
     # Locators
     PRODUCT_NAME = (By.CSS_SELECTOR, ".inventory_details_name")
@@ -35,8 +32,7 @@ class ProductDetailPage(BasePage):
         self.click_element(self.REMOVE_FROM_CART_BUTTON)
 
     def click_back_to_products(self):
-        # Import InventoryPage here, inside the method
-        from pages.inventory_page import InventoryPage  # <--- MODIFIED LINE
+        from pages.inventory_page import InventoryPage
         self.click_element(self.BACK_TO_PRODUCTS_BUTTON)
         return InventoryPage(self.driver)
 

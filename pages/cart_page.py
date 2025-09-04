@@ -1,11 +1,9 @@
 # pages/cart_page.py
 from selenium.webdriver.common.by import By
 
-from conftest import CONFIG
 from constants import Urls
 from pages.base_page import BasePage
-from pages.checkout_page import CheckoutYourInformationPage
-
+from pages.checkout_page import CheckoutInfoPage
 
 class CartPage(BasePage):
     # Locators
@@ -13,7 +11,7 @@ class CartPage(BasePage):
     CART_ITEM = (By.CSS_SELECTOR, ".cart_item")
     CHECKOUT_BUTTON = (By.ID, "checkout")
     CONTINUE_SHOPPING_BUTTON = (By.ID, "continue-shopping")
-    REMOVE_BUTTON_PREFIX = "remove-sauce-labs-"  # Example prefix, better to dynamically build this from product name
+    REMOVE_BUTTON_PREFIX = "remove-sauce-labs-"
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -24,7 +22,7 @@ class CartPage(BasePage):
         self.wait.until(self.is_element_visible(self.YOUR_CART_TITLE))
 
     def get_cart_item_names(self):
-        item_name_elements = self.driver.find_elements(By.CSS_SELECTOR, ".inventory_item_name")
+        item_name_elements = self.driver.find_elements(*self.INVENTORY_ITEM_NAME)
         return [elem.text for elem in item_name_elements]
 
     def get_cart_item_count(self):
@@ -39,10 +37,8 @@ class CartPage(BasePage):
 
     def click_checkout(self):
         self.click_element(self.CHECKOUT_BUTTON)
-        return CheckoutYourInformationPage(self.driver)
+        return CheckoutInfoPage(self.driver)
 
     def click_continue_shopping(self):
         self.click_element(self.CONTINUE_SHOPPING_BUTTON)
-        # This will navigate back to inventory, but we don't return an InventoryPage object
-        # because this class shouldn't have direct knowledge of InventoryPage.
-        # The test function will check URL or assert on InventoryPage elements.
+        # This will navigate back to inventory

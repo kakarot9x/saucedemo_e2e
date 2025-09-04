@@ -2,13 +2,12 @@
 from selenium.webdriver.common.by import By
 import logging
 
-from conftest import CONFIG
 from constants import Urls
 from pages.base_page import BasePage
-# Get a logger instance for this module
+
 logger = logging.getLogger(__name__)
 
-class CheckoutYourInformationPage(BasePage):
+class CheckoutInfoPage(BasePage):
      # Locators
      FIRST_NAME_FIELD = (By.ID, "first-name")
      LAST_NAME_FIELD = (By.ID, "last-name")
@@ -34,8 +33,7 @@ class CheckoutYourInformationPage(BasePage):
 
      def click_cancel(self):
         self.click_element(self.CANCEL_BUTTON)
-         # This returns to cart page, but BasePage doesn't know CartPage
-         # The test will verify the URL.
+        # Returns to inventory page
 
      def get_error_message(self):
         return self.get_element_text(self.ERROR_MESSAGE_LOCATOR)
@@ -52,6 +50,8 @@ class CheckoutOverviewPage(BasePage):
      TAX_LABEL = (By.CSS_SELECTOR, ".summary_tax_label")
      TOTAL_LABEL = (By.CSS_SELECTOR, ".summary_total_label")
      CART_ITEM_LABELS = (By.CSS_SELECTOR, ".cart_item_label")
+     CART_QUANTITY = (By.CLASS_NAME, "cart_quantity")
+     INVENTORY_ITEM_PRICE = (By.CLASS_NAME, "inventory_item_price")
 
      def __init__(self, driver):
          super().__init__(driver)
@@ -71,11 +71,10 @@ class CheckoutOverviewPage(BasePage):
 
      def get_item_details(self):
          item_details = []
-         item_elements = self.driver.find_elements(*self.CART_ITEM_LABELS)
-         for item_element in item_elements:
-             name = item_element.find_element(By.CLASS_NAME, "inventory_item_name").text
-             # quantity = int(item_element.find_element(By.CLASS_NAME, "cart_quantity").text)
-             price = float(item_element.find_element(By.CLASS_NAME, "inventory_item_price").text.replace('$', ''))
+         items = self.driver.find_elements(*self.CART_ITEM_LABELS)
+         for item in items:
+             name = item.find_element(*self.INVENTORY_ITEM_NAME).text
+             price = float(item.find_element(*self.INVENTORY_ITEM_PRICE).text.replace('$', ''))
              logger.info(f"Product name: {name}, price: {price}")
              item_details.append({"name": name, "price": price})
          return item_details
@@ -86,9 +85,7 @@ class CheckoutOverviewPage(BasePage):
 
      def click_cancel(self):
          self.click_element(self.CANCEL_BUTTON)
-         # This returns to inventory page, but BasePage doesn't know InventoryPage.
-         # The test will verify the URL.
-
+         # Returns to inventory page
 
 class CheckoutCompletePage(BasePage):
      # Locators
@@ -98,7 +95,7 @@ class CheckoutCompletePage(BasePage):
 
      def __init__(self, driver):
          super().__init__(driver)
-         self.url = CONFIG['base_url'] +  "checkout-complete.html"
+         self.url = Urls.CHECKOUT_COMPLETE_URL
 
      def get_complete_header_text(self):
         return self.get_element_text(self.COMPLETE_HEADER)
@@ -108,4 +105,4 @@ class CheckoutCompletePage(BasePage):
 
      def click_back_home(self):
         self.click_element(self.BACK_HOME_BUTTON)
-        # This returns to inventory page
+        # Returns to inventory page
