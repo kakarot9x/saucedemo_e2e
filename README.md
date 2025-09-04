@@ -43,6 +43,6 @@ run_test.bat -k authentication
 The test output in the project/framework root, including:
 + allure-results: allure result to generate more html report
 + logs: test run log files
-+ screenshots: 
-+ report.html
-+ test_results.xml
++ screenshots: screenshot output on failure(automatic capture) or on demand
++ report.html: simple html report from pytest
++ test_results.xml: junit xml result, to mapping ID & integrate with Test Management system like Test Rail
